@@ -75,11 +75,18 @@ function extractSpotify(activities) {
   const spotify = activities.find((a) => a.name === "Spotify");
   if (!spotify) return null;
 
+  let albumArt = null;
+
+  if (spotify.assets?.largeImage?.startsWith("spotify:")) {
+    const imageId = spotify.assets.largeImage.replace("spotify:", "");
+    albumArt = `https://i.scdn.co/image/${imageId}`;
+  }
+
   return {
     song: spotify.details ?? null,
     artist: spotify.state ?? null,
     album: spotify.assets?.largeText ?? null,
-    album_art_url: spotify.assets?.largeImage ?? null,
+    album_art_url: albumArt,
   };
 }
 
@@ -87,6 +94,7 @@ function extractSpotify(activities) {
 
 client.on("presenceUpdate", (_, presence) => {
   if (!presence?.user || presence.user.bot) return;
+  const spotifyData = extractSpotify(presence.activities);
 
   const activities = presence.activities.map((a) => ({
     name: a.name,
@@ -98,7 +106,7 @@ client.on("presenceUpdate", (_, presence) => {
     assets: {
       largeImage: resolveDiscordImage(a.applicationId, a.assets?.largeImage),
       smallImage: resolveDiscordImage(a.applicationId, a.assets?.smallImage),
-      spotifyAlbumArt: extractSpotify([a])?.album_art_url ?? null,
+      spotifyAlbumArt: spotifyData?.album_art_url ?? null,
       largeText: a.assets?.largeText ?? null,
       smallText: a.assets?.smallText ?? null,
     },
