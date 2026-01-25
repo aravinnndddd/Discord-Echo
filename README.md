@@ -1,6 +1,6 @@
 ﻿# Discord Echo
 
-A self-hosted Discord presence & activity API inspired by Lanyard.
+A self-hosted Discord presence & activity API 
 
 This service listens to Discord presence updates and exposes:
 
@@ -182,4 +182,5 @@ GET /api/stream
 MIT License
 
 You are free to use, modify, and distribute this project.
+
 
