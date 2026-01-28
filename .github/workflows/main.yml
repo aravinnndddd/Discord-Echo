@@ -1,0 +1,25 @@
+name: Website Uptime Monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # every 5 minutes
+  workflow_dispatch:       # allow manual run
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check website availability
+        run: |
+          echo "Checking website..."
+          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" https://discordpressence.onrender.com/api/activities/754961569858846770)
+
+          echo "HTTP Status Code: $STATUS_CODE"
+
+          if [ "$STATUS_CODE" -ne 200 ]; then
+            echo "❌ Website is DOWN"
+            exit 1
+          else
+            echo "✅ Website is UP"
+          fi
