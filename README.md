@@ -73,7 +73,7 @@ Create a `.env` file using `.env.example`.
 
 ```env
 DISCORD_TOKEN=your_discord_bot_token_here
-ALLOWED_ORIGINS=http://localhost:5173,https://aravind-p.vercel.app
+ALLOWED_ORIGINS=http://localhost:5173,your domain
 PORT=3000
 ```
 
@@ -182,5 +182,6 @@ GET /api/stream
 MIT License
 
 You are free to use, modify, and distribute this project.
+
 
 
