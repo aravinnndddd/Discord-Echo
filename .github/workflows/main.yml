@@ -13,7 +13,7 @@ jobs:
       - name: Check website availability
         run: |
           echo "Checking website..."
-          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" https://discordpressence.onrender.com/api/activities/754961569858846770)
+          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" https://discord-echo-o85u.onrender.com/api/activities/754961569858846770)
 
           echo "HTTP Status Code: $STATUS_CODE"
 
